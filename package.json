@@ -7,6 +7,7 @@
 		"test": "jest"
 	},
 	"dependencies": {
+		"airbitz-core-js": "^0.2.1",
 		"react": "16.0.0-alpha.6",
 		"react-native": "0.43.2"
 	},

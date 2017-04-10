@@ -6,9 +6,18 @@
 
 import React, { Component } from 'react'
 import { AppRegistry, StyleSheet, Text, View } from 'react-native'
+import { makeContext } from 'airbitz-core-js'
+
+var airbitz = null
 
 export default class ReactNativeTest extends Component {
   render () {
+    if (airbitz == null) {
+      airbitz = makeContext({
+        apiKey: '6dade5dc24e532fd16e7f369abe4af348c8fe6ca'
+      })
+    }
+
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
