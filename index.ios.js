@@ -6,18 +6,33 @@
 
 import React, { Component } from 'react'
 import { AppRegistry, StyleSheet, Text, View } from 'react-native'
-import { makeContext } from 'airbitz-core-js'
-
-var airbitz = null
+import { makeContext } from './abc.cjs.js'
+import { makeReactNativeIo } from 'react-native-airbitz-io'
+import { base64 } from 'rfc4648'
 
 export default class ReactNativeTest extends Component {
-  render () {
-    if (airbitz == null) {
-      airbitz = makeContext({
-        apiKey: '6dade5dc24e532fd16e7f369abe4af348c8fe6ca'
-      })
-    }
+  constructor (props) {
+    super(props)
+    this.state = {}
 
+    makeReactNativeIo()
+      .then(io => {
+        const airbitz = makeContext({
+          apiKey: '6dade5dc24e532fd16e7f369abe4af348c8fe6ca',
+          io
+        })
+
+        this.setState({ airbitz })
+        return airbitz
+      })
+      .then(context => {
+        const account = context.loginWithPassword('bob19', 'Funtimes19')
+        this.setState({ account })
+        return account
+      })
+  }
+
+  render () {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -29,6 +44,15 @@ export default class ReactNativeTest extends Component {
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
+        </Text>
+        <Text style={styles.instructions}>
+          {this.state.airbitz != null ? 'got airbitz' : 'not airbitz'}
+        </Text>
+        <Text style={styles.instructions}>
+          {this.state.account != null ? 'got account' : 'not account'}
+        </Text>
+        <Text style={styles.instructions}>
+          {this.state.airbitz ? base64.stringify(this.state.airbitz.io.random(32)) : '...'}
         </Text>
       </View>
     )
