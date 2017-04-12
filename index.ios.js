@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react'
 import { AppRegistry, StyleSheet, Text, View } from 'react-native'
-import { makeContext } from './abc.cjs.js'
+import { makeContext } from 'airbitz-core-js'
 import { makeReactNativeIo } from 'react-native-airbitz-io'
 import { base64 } from 'rfc4648'
 

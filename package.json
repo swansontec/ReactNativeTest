@@ -7,7 +7,7 @@
 		"test": "jest"
 	},
 	"dependencies": {
-		"airbitz-core-js": "^0.2.1",
+		"airbitz-core-js": "^0.3.0",
 		"buffer": "^5.0.6",
 		"react": "16.0.0-alpha.6",
 		"react-native": "0.43.2",
