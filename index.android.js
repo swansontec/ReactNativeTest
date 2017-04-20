@@ -16,16 +16,16 @@ export default class ReactNativeTest extends Component {
 
     makeReactNativeIo()
       .then(io => {
-        const airbitz = makeContext({
+        const context = makeContext({
           apiKey: '6dade5dc24e532fd16e7f369abe4af348c8fe6ca',
           io
         })
 
-        this.setState({ airbitz })
-        return airbitz
+        this.setState({ airbitz: context })
+
+        return context.loginWithPassword('bob19', 'Funtimes19')
       })
-      .then(context => {
-        const account = context.loginWithPassword('bob19', 'Funtimes19')
+      .then(account => {
         this.setState({ account })
         return account
       })
@@ -48,7 +48,9 @@ export default class ReactNativeTest extends Component {
           {this.state.airbitz != null ? 'got airbitz' : 'not airbitz'}
         </Text>
         <Text style={styles.instructions}>
-          {this.state.account != null ? 'got account' : 'not account'}
+          {this.state.account != null
+            ? 'got account ' + this.state.account.username
+            : 'not account'}
         </Text>
       </View>
     )
